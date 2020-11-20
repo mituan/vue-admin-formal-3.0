@@ -1,6 +1,7 @@
 <template>
     <div class="account">
         <div class="form-warp">
+            <div class="fs-30 text-center">管理系统</div>
             <a-form name='custom-validation' ref="ruleForm" v-bind="formConfig.layout">
                 <a-form-item>
                     <label>用户名</label>
