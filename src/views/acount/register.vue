@@ -20,10 +20,11 @@
                     <label>验证码</label>
                     <a-row :gutter='10'>
                         <a-col :span='14'>
-                            <a-input v-model:value="accountForm.code" type='password' />
+                            <a-input v-model:value="accountForm.code" type='text' maxLength='6' />
                         </a-col>
                         <a-col :span='10'>
-                            <a-button type="primary" block> 验证码 </a-button>
+                            <a-button type="primary" @click='getCode' :loading='buttom_loading' :disabled='button_disabled' block>
+                                {{buttom_text}} </a-button>
                         </a-col>
                     </a-row>
                 </a-form-item>
@@ -45,9 +46,13 @@
 <script>
     //  导入验证类的方法
     //  按需导入
-    import { checkPhone, checkPassword as checkPass} from '../../utils/verification';
+    import {
+        checkPhone,
+        checkPassword as checkPass
+    } from '../../utils/verification';
     //  全部导入
     // import * as veri from '../../utils/verification'
+    import { message } from 'ant-design-vue';
 
     import {
         onMounted,
@@ -65,7 +70,7 @@
             let checkUsername = async (rule, value, callback) => {
                 if (!value) {
                     return Promise.reject('请 输 入 用 户 名');
-                } else if (!checkPhone(value)){
+                } else if (!checkPhone(value)) {
                     return Promise.reject('请 输 入 11 位 数 字 的 手 机 号');
                 } else {
                     return Promise.resolve();
@@ -74,13 +79,24 @@
             let checkPassword = async (rule, value, callback) => {
                 if (!value) {
                     return Promise.reject('请 输 入 密 码');
-                } else if (!checkPass(value)){
-                    return Promise.reject('请 输 入 密 码 为 字 母 + 数 字');
+                } else if (!checkPass(value)) {
+                    return Promise.reject('请 输 入 密 码 为 字 母 + 数 字 + 特殊符号');
                 } else {
                     return Promise.resolve();
                 }
             };
-           
+
+            let checkPasswords = async (rule, value, callback) => {
+                const password = formConfig.accountForm.password;
+                if (!value) {
+                    return Promise.reject('请 输 入 确 认 密 码');
+                } else if (password !== value) {
+                    return Promise.reject('两 次 密 码 不 一 致');
+                } else {
+                    return Promise.resolve();
+                }
+            };
+
             const formConfig = reactive({
                 layout: {
                     wrapperCol: {
@@ -106,26 +122,58 @@
                         trigger: 'change'
                     }],
                     passwords: [{
-                        required: true,
-                        message: '请 输 入 确 认 密 码',
-                        trigger: 'blur'
+                        validator: checkPasswords,
+                        // required: true,
+                        // message: '请 输 入 确 认 密 码',
+                        trigger: 'change'
                     }],
                     code: [{
                         required: true,
                         message: '请 输 入 验 证 码',
                         trigger: 'blur'
                     }],
-                }
+                },
             })
-            const data = toRefs(formConfig);
+            const dataItem = reactive ({
+                 // 获取验证码按钮
+                buttom_text: '获取验证码',
+                buttom_loading: false,
+                button_disabled: false,
+                sec:60,
+                // 定时器
+                timer:null,
+            })
+            const form = toRefs(formConfig);
+            const data = toRefs(dataItem);
 
-            const handleFinish = () => {
-                console.log('mtreasure');
+            // 表单提交完成
+            const handleFinish = (value) => {
+                console.log('mtreasure', value);
+            }
+
+            //获取验证码按钮
+            const getCode = () => {
+                if(!formConfig.username){
+                    message.error({content:'用户名不能为空'});
+                }
+                // 优先判断定时器是否存在，存在则先清除后再开启
+                dataItem.timer && clearInterval(dataItem.timer);
+
+                dataItem.timer = setInterval(() => {
+                    const s = dataItem.sec --;
+                    dataItem.buttom_text = `${s}秒`;
+                    if( s <= 0 ){
+                        clearInterval(dataItem.timer);
+                        dataItem.buttom_text = '重新获取';
+                    }
+                },1000)
             }
 
             return {
+                ...form,
                 ...data,
-                handleFinish
+                handleFinish,
+                getCode
             };
         },
     }
