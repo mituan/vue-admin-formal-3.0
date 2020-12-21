@@ -10,10 +10,17 @@ const routes = [{
     component: () => import('../views/acount/Login.vue')
     // component: require('../views/acount/Login.vue')
   },
+  //注册
   {
     path: "/register",
     name: "register",
     component: () => import('../views/acount/register.vue')
+  },
+  //忘记密码
+  {
+    path: "/forget",
+    name: "forget",
+    component: () => import('../views/acount/forget.vue')
   },
 ];
 

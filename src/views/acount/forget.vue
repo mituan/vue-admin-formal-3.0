@@ -1,7 +1,7 @@
 <template>
     <div class="account">
         <div class="form-warp">
-            <div class="fs-30 text-center">注册</div>
+            <div class="fs-30 text-center">密码重置</div>
             <a-form :model='accountForm' :rules="formRules" ref="ruleForm" v-bind="layout" @finish="handleFinish">
                 <a-form-item name="username">
                     <label>用户名</label>
@@ -36,8 +36,8 @@
                 </a-form-item>
             </a-form>
             <div class="text-center">
-                 <router-link to='/' class="color-white">登录</router-link>|
-                <router-link to='/forget' class="color-white">忘记密码</router-link>
+                <router-link to='/' class="color-white">登录</router-link>|
+                <router-link to='/register' class="color-white">注册</router-link>
             </div>
         </div>
     </div>

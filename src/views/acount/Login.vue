@@ -19,8 +19,8 @@
                 </a-form-item>
             </a-form>
              <div class="text-center">
-                <a class="color-white">忘记密码</a>|
-                <router-link to='/register'>注册</router-link>
+                <router-link to='/forget' class="color-white">忘记密码</router-link>|
+                <router-link to='/register' class="color-white">注册</router-link>
             </div>
         </div>
     </div>
