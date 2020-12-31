@@ -22,6 +22,13 @@ const routes = [{
     name: "forget",
     component: () => import('../views/acount/forget.vue')
   },
+  //首页
+  {
+    path: "/index",
+    name: "Index",
+    component: () => import('../views/layout/Index.vue')
+  },
+  
 ];
 
 const router = createRouter({
