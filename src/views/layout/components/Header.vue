@@ -38,6 +38,7 @@
         useI18n
     } from 'vue-i18n';
     export default {
+        name:"Header",
         setup() {
             // 扩展语言
             const {

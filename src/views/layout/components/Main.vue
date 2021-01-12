@@ -1,5 +1,6 @@
 <template>
-    主体内容
+    <!-- route子级在此映射 -->
+    <router-view />
 </template>
 <script>
 export default {
