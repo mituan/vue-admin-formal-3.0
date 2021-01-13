@@ -14,7 +14,7 @@ module.exports = {
     css: {
         loaderOptions: { 
           scss: {
-            prependData: `@import "./src/styles/main.scss";`
+            prependData: `@import "./src/styles/main.scss";`  //全局scss样式
           },
         }
       }

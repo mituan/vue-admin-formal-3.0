@@ -1,7 +1,7 @@
 <template>
     <section>
         <a-layout id='layout-main'>
-            <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible >
+            <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible width="255">
                  <LayoutAside />
             </a-layout-sider>
             <a-layout>

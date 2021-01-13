@@ -38,7 +38,8 @@ const routes = [{
     path: "/",
     name: "Index",
     meta:{
-      title:"首页"
+      title:"首页",
+      icon:"icon-aside-home"
     },
     component: () => import('../views/layout/Index.vue'),
     // children: [
@@ -52,6 +53,69 @@ const routes = [{
     //     component: () => import('../views/forCc/pig.vue'),
     //   }
     // ]
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    meta:{
+      title:"管理总台",
+      icon:"icon-aside-console"
+    },
+    component: () => import('../views/layout/Index.vue'),
+    children: [
+      {
+        path: "/role",
+        name: "role",
+        meta:{
+          title:"角色管理"
+        },
+        component: () => import('../views/admin/role.vue'),
+      },{
+        path: "/user",
+        name: "user",
+        meta:{
+          title:"用户管理"
+        },
+        component: () => import('../views/admin/user.vue'),
+      }
+    ]
+  },
+  {
+    path: "/news",
+    name: "News",
+    meta: {
+      title: "信息管理",
+      icon: "icon-aside-informtion"
+    },
+    component: () => import("../views/layout/Index.vue"),
+    children: [  {
+      path: "/redFlowerForYou",
+      name: "redFlowerForYou",
+      meta:{
+        title:"送你一朵小红花"
+      },
+      component: () => import('../views/forCc/redFlowerForYou.vue'),
+    }]
+  },
+  {
+    path: "/member",
+    name: "Member",
+    meta: {
+      title: "会员管理",
+      icon: "icon-aside-user"
+    },
+    component: () => import("../views/layout/Index.vue"),
+    children: []
+  },
+  {
+    path: "/product",
+    name: "Product",
+    meta: {
+      title: "产品管理",
+      icon: "icon-aside-product"
+    },
+    component: () => import("../views/layout/Index.vue"),
+    children: []
   },
   {
     path: "/redFlower",
@@ -69,33 +133,6 @@ const routes = [{
           title:"送你一朵小红花"
         },
         component: () => import('../views/forCc/redFlowerForYou.vue'),
-      }
-    ]
-  },
-  //新闻
-  {
-    path: "/admin",
-    name: "admin",
-    meta:{
-      title:"管理总台"
-    },
-    
-    component: () => import('../views/layout/Index.vue'),
-    children: [
-      {
-        path: "/role",
-        name: "role",
-        meta:{
-          title:"角色管理"
-        },
-        component: () => import('../views/admin/role.vue'),
-      },{
-        path: "/user",
-        name: "user",
-        meta:{
-          title:"用户管理"
-        },
-        component: () => import('../views/admin/user.vue'),
       }
     ]
   },

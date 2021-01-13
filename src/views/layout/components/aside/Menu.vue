@@ -1,7 +1,8 @@
 <template>
         <a-sub-menu :key="menu.path">
             <template #title>
-                <span>{{ menu.meta && menu.meta.title }}</span>
+                <i class="icon icon-size-21 mb--5" :class="menu.meta && menu.meta.icon"></i>
+                {{ menu.meta && menu.meta.title }}
             </template>
             <template v-if="menu.children.length">
                 <template v-for="item in menu.children">
