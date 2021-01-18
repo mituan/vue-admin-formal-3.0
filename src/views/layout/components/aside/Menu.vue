@@ -1,7 +1,8 @@
 <template>
         <a-sub-menu :key="menu.path">
             <template #title>
-                <i class="icon icon-size-21 mb--5" :class="menu.meta && menu.meta.icon"></i>
+                <!-- <i class="icon icon-size-21 mb--5" :class="menu.meta && menu.meta.icon"></i> -->
+                 <svg-icon :iconName="menu.meta && menu.meta.icon" className="aside-svg" ></svg-icon>
                 {{ menu.meta && menu.meta.title }}
             </template>
             <template v-if="menu.children.length">
@@ -18,8 +19,10 @@
         </a-sub-menu>
 </template>
 <script>
+    // import SvgIcon from '@/components/Svgicon'
     export default {
         name: "Menu",
+        // components:{ SvgIcon },
         props: {
             menu: {
                 type: Object,

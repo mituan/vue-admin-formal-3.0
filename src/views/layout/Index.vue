@@ -20,8 +20,7 @@
     import LayoutAside from './components/aside/index';
     import LayoutHeader from './components/Header';
     import LayoutMain from './components/Main';
-import { reactive, toRefs } from 'vue';
-
+    import { reactive, toRefs } from 'vue';
     export default {
         components: {
             LayoutAside,

@@ -31,7 +31,7 @@
 </template>
 <script>
     import {
-        reactive
+        reactive,getCurrentInstance
     } from 'vue';
     // 语言
     import {
@@ -44,6 +44,8 @@
             const {
                 locale
             } = useI18n();
+            const {ctx} = getCurrentInstance();
+            console.log("ctx",ctx);
             const data = reactive({
                 lang: [{
                     label: '中文',
@@ -52,14 +54,24 @@
                     label: '英文',
                     value: 'en'
                 }],
-                lang_current: 'ch'
+                lang_current: 'ch',
+
+                aaa:"AAA"
             })
+
+            // console.log(ctx.$t("header_menu.logout"));
 
             const toggleLang = (lang) => {
                 // console.log("lang", lang);
+                console.log("vvv",ctx.$t("header_menu.logout"));
                 locale.value = lang
                 data.lang_current = lang;
+                ctx.aaa = 'BBB'
+                console.log("ctx.aaa",ctx.aaa);
+                ctx.aaa = ctx.$t("header_menu.logout");
+                console.log("ctx.aaa",ctx.aaa);
             }
+
 
             return {
                 data,

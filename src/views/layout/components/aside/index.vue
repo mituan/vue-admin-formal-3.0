@@ -10,7 +10,7 @@
           <!-- 第一级菜单 -->
            <a-menu-item v-if="!item.children" :key="item.path">
              <router-link :to="item.path"> 
-               <i class="icon icon-size-21 mb--5" :class="item.meta && item.meta.icon"></i>
+                <svg-icon :iconName="item.meta && item.meta.icon" className="aside-svg" ></svg-icon>
                {{ item.meta && item.meta.title }}</router-link>
            </a-menu-item>
 
@@ -34,6 +34,7 @@
 
   // 导入子级组件
   import Menu from "./Menu";
+  // import SvgIcon from '@/components/Svgicon'
   export default {
     components:{ Menu },
     setup() {
@@ -75,10 +76,11 @@
 </script>
 <style lang="scss" scoped>
 #logo {
-  padding: 24px 0px 20px;
+  padding: 14px 0px 10px;
   border-bottom: 1px solid #000;
   text-align: center;
   img {
+    height: 50px;
     display: inline;
   }
 }
