@@ -31,7 +31,8 @@ const routes = [{
       title:"忘记密码"
     },
     hidden:true,
-    component: () => import('../views/acount/forget.vue')
+    component: () => import('../views/acount/forget.vue'),
+   
   },
   //首页
   {
@@ -43,17 +44,15 @@ const routes = [{
       icon:"home" 
     },
     component: () => import('../views/layout/Index.vue'),
-    // children: [
-    //   {
-    //     path: "/hcc",
-    //     name: "index",
-    //     meta:{
-    //       title:"黄聪聪"
-    //     },
-    //     hidden:true,
-    //     component: () => import('../views/forCc/pig.vue'),
-    //   }
-    // ]
+    children:[{
+      path: "/home",
+          name: "home",
+          meta:{
+            title:"首页"
+          },
+          // hidden:true,
+          component: () => import('../views/home/index.vue'),
+    }]
   },
   {
     path: "/admin",
@@ -67,11 +66,13 @@ const routes = [{
       {
         path: "/role",
         name: "role",
+        // hidden:true,
         meta:{
           title:"角色管理"
         },
         component: () => import('../views/admin/role.vue'),
       },{
+        // hidden:true,
         path: "/user",
         name: "user",
         meta:{
@@ -89,14 +90,7 @@ const routes = [{
       icon: "informtion"
     },
     component: () => import("../views/layout/Index.vue"),
-    children: [  {
-      path: "/redFlowerForYou",
-      name: "redFlowerForYou",
-      meta:{
-        title:"送你一朵小红花"
-      },
-      component: () => import('../views/forCc/redFlowerForYou.vue'),
-    }]
+    children: []
   },
   {
     path: "/member",

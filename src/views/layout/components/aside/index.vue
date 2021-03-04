@@ -8,10 +8,10 @@
       <template v-for="(item,i) in routers">
         <template v-if="!item.hidden">
           <!-- 第一级菜单 -->
-           <a-menu-item v-if="!item.children" :key="item.path">
-             <router-link :to="item.path"> 
+           <a-menu-item v-if="hasOnlyChildren(item)" :key="item.path">
+             <router-link :to="item.children[0].path"> 
                 <svg-icon :iconName="item.meta && item.meta.icon" className="aside-svg" ></svg-icon>
-               {{ item.meta && item.meta.title }}</router-link>
+               {{ item.children[0].meta && item.children[0].meta.title }}</router-link>
            </a-menu-item>
 
           <!-- 子级菜单 -->
@@ -63,13 +63,23 @@
         localStorage.setItem('openKeys',openKeys);
       }
 
-      console.log("routers", routers);
+      // 检测是否只有一个子路由
+      const hasOnlyChildren = (data) => {
+        //不存在子级的情况
+        if(!data.children){ return false;}
+        //过滤隐藏的子级
+        const routers = data.children.filter(item => item.hidden ? false : true);
+        //判断最终结果
+        if(routers.length === 1){ return true; }
+        return false;
+      }
 
       return {
         data,
         routers,
         selectMenu,
-        openMenu
+        openMenu,
+        hasOnlyChildren
       }
     },
   }

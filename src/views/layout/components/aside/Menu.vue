@@ -7,6 +7,7 @@
             </template>
             <template v-if="menu.children.length">
                 <template v-for="item in menu.children">
+                    <template v-if="!item.hidden">
                     <!-- 不存在子级的菜单 -->
                     <a-menu-item v-if="!item.children" :key="item.path">
                         <router-link :to="item.path">{{ item.meta && item.meta.title}}</router-link>
@@ -14,6 +15,7 @@
                     <!-- 存在子级的菜单 - 循环调用此组件 -->
                     <!-- 自调用可直接使用，无需导入 -->
                     <Menu :menu="item" v-else :key="item.path"/> 
+                    </template>
                 </template>
             </template>
         </a-sub-menu>
