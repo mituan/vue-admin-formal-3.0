@@ -56,24 +56,82 @@
                 },
             })
             const data = toRefs(formConfig);
-            // const submit = () => {
-            //     // proxy.$axios.post('getSms');
-            //     GetCode({'id':'1222'}).then(res => {
-            //         console.log("res",res);
-            //     })
-            // }
+            const submit = () => {
+                // proxy.$axios.post('getSms');
+                GetCode({'id':'1222'}).then(res => {
+                    console.log("res",res);
+                }).catch(error => {
+                    console.log("error111",error);
+                })
+            }
             
 
             /**
-             * Promise  对象理解
+             * Promise  对象理解 :一旦执行，中途无法取消
              */
-            // const promise_1 = () => {
-            //     return new Promise((resolve,reject) => {
-            //         reject('bbbb');
-            //     })
-            // }
-
+            const handlerPromise = () => {
+                return new Promise((resolve,reject) => {
+                    // resolve('111');
+                    // 失败返回
+                    resolve('主');
+                    
+                })
+            }
+               const promise_1 = () => {
+                return new Promise((resolve,reject) => {
+                    resolve('111');
+                    
+                })
+            }
+               const promise_2 = () => {
+                return new Promise((resolve,reject) => {
+                    resolve('222');
+                    
+                })
+            }
+               const promise_3 = () => {
+                return new Promise((resolve,reject) => {
+                    resolve('333');
+                    
+                })
+            }
             
+            /**
+             * Promise基础调用
+             */
+            // promise_1 异步 return 后返回值处理
+            // promise_1().then(res => {
+            //     console.log(res);
+            // }).catch(error => {
+            //     console.log("error",error);
+            // })
+
+            /**
+             * Promise链式调用
+             */
+            // handlerPromise().then(res => {
+            //     console.log(res);
+            //     return promise_1();
+            // }).then(res => {
+            //     console.log(res);
+            //     return promise_2();
+            // }).then(res => {
+            //     console.log(res);
+            //     return promise_3();
+            // }).then(res => {
+            //     console.log(res);
+            // }).catch(error => {
+            //     console.log(error);
+            // })
+
+            /**
+             * promise all方法:有一个未执行则无法执行
+             */
+            Promise.all([promise_1(),promise_2(),promise_3()]).then(res => {
+                console.log("res",res);
+            }).catch(err => {
+                console.log(err);
+            })
 
             
 

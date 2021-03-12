@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { message } from 'ant-design-vue'
 
 const service = axios.create({
     baseURL: process.env.VUE_APP_FLAG,
@@ -20,9 +21,28 @@ const service = axios.create({
 // 添加响应拦截器
 service.interceptors.response.use(function (response) {
     // 对响应数据做点什么
-    return response;
+
+    /**
+     * http 请求协议状态，不为200时，是失败，为200是成功
+     * 重点知识：
+     * 1.约定的属性：resCode（自定义）
+     * 2.resCode的什么值代表成功，业务逻辑有问题的情况，代表失败，否则就成功：0
+     */
+    const data = response.data;
+    if(data.resCode === 0 ){
+      return Promise.resolve(data);
+    } else {
+      message.info(data.message);
+      return Promise.reject(data);
+    }
+    // return response;
   }, function (error) {
+    /**
+     * 根据控制台 http 协议，未通过走这
+     */
     // 对响应错误做点什么
+    const data = JSON.parse(error.request.response);
+    message.info(data.message);
     return Promise.reject(error);
   });
 

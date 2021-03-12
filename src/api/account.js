@@ -3,6 +3,7 @@ import service from '@/utils/request.js'
 export function GetCode(data){
     // 自动拼接 baseUrl + url
     return service.request({ url: '/getCode/', method: 'post',  data})
+    // return service.request({ url: '/error/', method: 'post',  data})
 }
 
 /**
