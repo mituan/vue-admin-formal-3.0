@@ -16,6 +16,7 @@
                 </a-form-item>
                 <a-form-item>
                     <a-button type="primary" html-type='submit' block> 登 录 </a-button>
+                    <a-button type="primary" @click="submit" block> 测试按钮 </a-button>
                 </a-form-item>
             </a-form>
              <div class="text-center">
@@ -27,7 +28,9 @@
 </template>
 
 <script>
-    import { onMounted, reactive, toRefs, ref } from 'vue';
+    import { onMounted, reactive, toRefs, ref , getCurrentInstance } from 'vue';
+    // API
+    import { GetCode } from '@/api/account';
     import Captcha from '@/components/Captcha/index.vue';
     export default {
         name: 'Login',
@@ -35,6 +38,13 @@
             Captcha
         },
         setup(props) {
+            console.log(getCurrentInstance());
+            //相当于 Vue2.0 的 this 对象
+            // ctx 获取实例上下文
+            // const { ctx } = getCurrentInstance(); //ctx 对象 仅在"开发环境"可获得 属性 和 方法,"生产环境" 无法获得。
+            const { proxy } = getCurrentInstance();// proxy 与 ctx 东西一样，支持开发环境和生成环境的使用
+            console.log("proxy",proxy); 
+
             const formConfig = reactive({
                 layout: {
                     // labelCol: {
@@ -46,9 +56,29 @@
                 },
             })
             const data = toRefs(formConfig);
+            // const submit = () => {
+            //     // proxy.$axios.post('getSms');
+            //     GetCode({'id':'1222'}).then(res => {
+            //         console.log("res",res);
+            //     })
+            // }
+            
+
+            /**
+             * Promise  对象理解
+             */
+            // const promise_1 = () => {
+            //     return new Promise((resolve,reject) => {
+            //         reject('bbbb');
+            //     })
+            // }
+
+            
+
+            
 
             return {
-                ...data,
+                ...data,submit
             };
         },
     }
